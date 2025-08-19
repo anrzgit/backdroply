@@ -13,7 +13,13 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  final List<String> categories = const ['Nature', 'Travel', 'People'];
+  final List<String> categories = const [
+    'Nature',
+    'Travel',
+    'People',
+    'Architecture-interior',
+    'Textures-patterns',
+  ];
 
   String? _currentSlug; // UI guard to prevent duplicate dispatches
 
@@ -40,23 +46,26 @@ class _HomepageState extends State<Homepage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CategoryScroller(
-            categories: categories,
-            initialIndex: 0,
-            onSelected: (i) {
-              final slug = categories[i].toLowerCase();
-              if (_currentSlug == slug) return; // UI guard
-              setState(() => _currentSlug = slug);
-              context.read<TopicImagesBloc>().add(
-                FetchTopicPhotos(
-                  slug: slug,
-                  page: 1,
-                  perPage: 30,
-                  orderBy: 'latest',
-                  orientation: 'portrait',
-                ),
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: CategoryScroller(
+              categories: categories,
+              initialIndex: 0,
+              onSelected: (i) {
+                final slug = categories[i].toLowerCase();
+                if (_currentSlug == slug) return; // UI guard
+                setState(() => _currentSlug = slug);
+                context.read<TopicImagesBloc>().add(
+                  FetchTopicPhotos(
+                    slug: slug,
+                    page: 1,
+                    perPage: 30,
+                    orderBy: 'latest',
+                    orientation: 'portrait',
+                  ),
+                );
+              },
+            ),
           ),
           Expanded(
             child: BlocBuilder<TopicImagesBloc, TopicImagesState>(
