@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallpaper_app/bloc/images_bloc.dart';
+import 'package:wallpaper_app/bloc/search_bloc/images_bloc.dart';
+import 'package:wallpaper_app/bloc/topic_images_bloc/topic_images_bloc.dart';
 import 'package:wallpaper_app/screens/homepage.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => ImagesBloc())],
+      providers: [
+        BlocProvider(create: (context) => ImagesBloc()),
+        BlocProvider(create: (context) => TopicImagesBloc()),
+      ],
       child: const MyApp(),
     ),
   );

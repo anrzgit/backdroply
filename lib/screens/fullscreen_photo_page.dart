@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_saver_plus/gallery_saver.dart';
-import 'package:wallpaper_app/core/secrets.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:gallery_saver_plus/gallery_saver.dart';
-import 'package:wallpaper_app/core/secrets.dart';
+import 'package:wallpaper_app/logic/download_image.dart';
 
 class FullscreenPhotoPage extends StatefulWidget {
   const FullscreenPhotoPage({
@@ -25,42 +20,6 @@ class FullscreenPhotoPage extends StatefulWidget {
 }
 
 class _FullscreenPhotoPageState extends State<FullscreenPhotoPage> {
-  // 1) Trigger Unsplash download endpoint (required by Unsplash API)
-  Future<void> triggerUnsplashDownload({
-    required String photoId,
-    required String accessKey,
-  }) async {
-    final uri = Uri.https('api.unsplash.com', '/photos/$photoId/download', {
-      'client_id': accessKey,
-    });
-    // Fire-and-forget is ok, but await to log errors if any.
-    await http.get(uri).catchError((_) {});
-  }
-
-  // 2) Save a network image to the gallery using gallery_saver_plus
-  Future<void> saveUnsplashImage({
-    required String photoId,
-    required String imageUrl, // e.g. photo['urls']['full']
-    String albumName = 'Wallpapers',
-  }) async {
-    // Track the download with Unsplash first
-    await triggerUnsplashDownload(
-      photoId: photoId,
-      accessKey: AppSecrets().accessKey,
-    );
-
-    // Save directly from network URL
-    final bool? ok = await GallerySaver.saveImage(
-      imageUrl,
-      albumName: albumName, // optional; creates folder/album if possible
-      // name: 'unsplash_$photoId', // optional: some devices ignore custom name for network URLs
-    );
-
-    if (ok != true) {
-      throw Exception('Save failed');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -82,7 +41,7 @@ class _FullscreenPhotoPageState extends State<FullscreenPhotoPage> {
                 const SnackBar(content: Text('Downloading...')),
               );
               try {
-                await saveUnsplashImage(
+                await Downloadimage().saveUnsplashImage(
                   photoId: widget.id,
                   imageUrl: widget
                       .fullUrl, // use 'full' for best quality; 'regular' for faster download

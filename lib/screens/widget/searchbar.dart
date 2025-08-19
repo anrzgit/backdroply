@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallpaper_app/bloc/images_bloc.dart';
+import 'package:wallpaper_app/bloc/search_bloc/images_bloc.dart';
+import 'package:wallpaper_app/screens/show_searched_images_screen.dart';
 // import your bloc files
 
 class SearchAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -46,6 +47,9 @@ class _SearchAppBarState extends State<SearchAppBar> {
       ),
     );
     FocusScope.of(context).unfocus();
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => ShowSearchedImagesScreen()));
   }
 
   PreferredSizeWidget _buildAppBar() {
