@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:wallpaper_app/core/secrets.dart';
+import 'package:wallpaper_app/core/secrets/secrets.dart';
 
 part 'topic_images_event.dart';
 part 'topic_images_state.dart';
