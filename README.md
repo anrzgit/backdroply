@@ -1,16 +1,5 @@
-# wallpaper_app
+# Backdroply
 
-A new Flutter project.
+Backdroply is a simple, fast wallpaper app that lets anyone find and download beautiful images from Unsplash. Search by keywords to get exactly what’s wanted, or browse curated collections for quick inspiration. Each image is high quality and sized to look great on modern phones.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The interface is clean and minimal, so the images stand out. Categories highlight popular themes like Nature, Abstract, Cityscapes, Minimal, and AMOLED. Results include useful details such as resolution and photographer credit. Downloads are stored locally, so favorites stay available even offline.
