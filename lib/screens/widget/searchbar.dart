@@ -124,7 +124,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
             )
           : Padding(
               padding: const EdgeInsets.only(left: 16.0),
-              child: const Text('Wallpapers'),
+              child: const Text('Backdroply'),
             ),
       actions: _isSearching
           ? [
